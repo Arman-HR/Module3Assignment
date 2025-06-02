@@ -14,4 +14,9 @@ def index():
         data = request.form
         json_data = jsonify(data)
         return json_data
-    return render_template('index.html', form=form, output="Nothing")
+    #Te vervangen met de AI output data 
+    Risk_factor = 1 
+    riskString = "Risk of Diabetes Detected" if Risk_factor == 1 else "No Risk of Diabetes Detected"
+    Confidence = 90
+    ReturnValue = f"There is {riskString} with a certainty of {Confidence}%"
+    return render_template('index.html', form=form, output=ReturnValue)
