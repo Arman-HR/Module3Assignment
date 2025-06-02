@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, NumberRange
 class DiabetesForm(FlaskForm):
     Pregnancies = IntegerField(
         "Pregnancies",
-        validators=[DataRequired(), NumberRange(min=0)],
+        validators=[DataRequired()],
         render_kw={"placeholder": "Number of times pregnant"}
     )
     Glucose = IntegerField(

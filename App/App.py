@@ -51,17 +51,25 @@ def predict_diabetes_from_json(json_input, model, scaler) -> tuple[int, float]:
 def index():
     form = DiabetesForm()
     if form.validate_on_submit():
-        print("boe")
-        # met deze data kan dr nou verder mee gewerkt worden in het model
-        data = request.form
-        json_data = jsonify(data)
+        data = {
+            'Pregnancies': form.Pregnancies.data,
+            'Glucose': form.Glucose.data,
+            'BloodPressure': form.BloodPressure.data,
+            'SkinThickness': form.SkinThickness.data,
+            'Insulin': form.Insulin.data,
+            'BMI': form.BMI.data,
+            'DiabetesPedigreeFunction': form.DiabetesPedigreeFunction.data,
+            'Age': form.Age.data
+        }
         Risk, Prob = predict_diabetes_from_json(
-            json_data,
+            data,
             model=logreg,
             scaler=scaler
         )
-        print(Risk, Prob)
         riskString: str = "Risk of Diabetes Detected" if Risk == 1 else "No Risk of Diabetes Detected"
         ReturnValue = f"There is {riskString} with a certainty of {Prob*100}%"
         return render_template('index.html', form=form, output=ReturnValue)
+    if request.method == 'POST':
+        print("Form did not validate")
+        print(form.errors)
     return render_template('index.html', form=form, output="Nothing")
