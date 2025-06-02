@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diabetes Form</title>
+   <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f2f2;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0 auto;
+	  max-width: 70vw;
+    }
+
+    .form-container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-container h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+      color: #555;
+    }
+
+    input[type="number"], input[type="range"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Diabetes Input Form</h1>
+  <form action="{{ url_for('predict') }}" method="POST">
+    <label for="pregnancies">Pregnancies:</label>
+    <input type="number" placeholder="Number of times pregnant" id="pregnancies" name="Pregnancies" required><br><br>
+
+    <label for="glucose">Glucose:</label>
+    <input type="number" placeholder="Plasma glucose concentration" id="glucose" name="Glucose" required><br><br>
+
+    <label for="bloodpressure">Blood Pressure:</label>
+    <input type="number" placeholder="Diastolic blood pressure (mm Hg)" id="bloodpressure" name="BloodPressure" required><br><br>
+
+    <label for="skinthickness">Skin Thickness:</label>
+    <input type="number" placeholder="Triceps skin fold thickness (mm)" id="skinthickness" name="SkinThickness" required><br><br>
+
+    <label for="insulin">Insulin:</label>
+    <input type="number" placeholder="2-Hour serum insulin (mu U/ml)" id="insulin" name="Insulin" required><br><br>
+
+    <label for="bmi">BMI:</label>
+    <input type="number" placeholder="Body mass index (weight in kg/(height in m)^2)" step="0.1" id="bmi" name="BMI" required><br><br>
+
+    <label for="dpf">Diabetes Pedigree Function:</label>
+    <input type="number" placeholder="Diabetes pedigree function" step="0.01" id="dpf" name="DiabetesPedigreeFunction" required><br><br>
+
+	<label for="age">Age: <span id="ageOutput">0</span></label>
+    <input type="range" placeholder="Age in years" id="age" name="Age" value="0" max="130" min="0" step="1" oninput="changeRangeValue(this.value)" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+<script>
+	const changeRangeValue = (val) => {
+		const rangeOutputEl = document.getElementById("ageOutput");
+		rangeOutputEl.innerHTML = val.toString();
+	};
+</script>
+</html>
