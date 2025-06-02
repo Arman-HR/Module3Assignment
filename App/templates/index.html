@@ -37,7 +37,7 @@
       color: #555;
     }
 
-    input[type="number"], input[type="range"] {
+    input {
       width: 100%;
       padding: 0.5rem;
       border: 1px solid #ccc;
@@ -46,7 +46,7 @@
       box-sizing: border-box;
     }
 
-    button {
+    input[type="submit"] {
       margin-top: 1.5rem;
       width: 100%;
       padding: 0.75rem;
@@ -59,40 +59,26 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    input[type="submit"]:hover {
       background-color: #45a049;
     }
   </style>
 </head>
 <body>
   <h1>Diabetes Input Form</h1>
-  <form action="{{ url_for('predict') }}" method="POST">
-    <label for="pregnancies">Pregnancies:</label>
-    <input type="number" placeholder="Number of times pregnant" id="pregnancies" name="Pregnancies" required><br><br>
-
-    <label for="glucose">Glucose:</label>
-    <input type="number" placeholder="Plasma glucose concentration" id="glucose" name="Glucose" required><br><br>
-
-    <label for="bloodpressure">Blood Pressure:</label>
-    <input type="number" placeholder="Diastolic blood pressure (mm Hg)" id="bloodpressure" name="BloodPressure" required><br><br>
-
-    <label for="skinthickness">Skin Thickness:</label>
-    <input type="number" placeholder="Triceps skin fold thickness (mm)" id="skinthickness" name="SkinThickness" required><br><br>
-
-    <label for="insulin">Insulin:</label>
-    <input type="number" placeholder="2-Hour serum insulin (mu U/ml)" id="insulin" name="Insulin" required><br><br>
-
-    <label for="bmi">BMI:</label>
-    <input type="number" placeholder="Body mass index (weight in kg/(height in m)^2)" step="0.1" id="bmi" name="BMI" required><br><br>
-
-    <label for="dpf">Diabetes Pedigree Function:</label>
-    <input type="number" placeholder="Diabetes pedigree function" step="0.01" id="dpf" name="DiabetesPedigreeFunction" required><br><br>
-
-	<label for="age">Age: <span id="ageOutput">0</span></label>
-    <input type="range" placeholder="Age in years" id="age" name="Age" value="0" max="130" min="0" step="1" oninput="changeRangeValue(this.value)" required><br><br>
-
-    <button type="submit">Submit</button>
+  <form method="POST">
+	{{ form.hidden_tag() }}
+    {{ form.Pregnancies.label }} {{ form.Pregnancies(size=32) }}<br>
+    {{ form.Glucose.label }} {{ form.Glucose(size=32) }}<br>
+    {{ form.BloodPressure.label }} {{ form.BloodPressure(size=32) }}<br>
+    {{ form.SkinThickness.label }} {{ form.SkinThickness(size=32) }}<br>
+    {{ form.Insulin.label }} {{ form.Insulin(size=32) }}<br>
+    {{ form.BMI.label }} {{ form.BMI(size=32) }}<br>
+    {{ form.DiabetesPedigreeFunction.label }} {{ form.DiabetesPedigreeFunction(size=32) }}<br>
+    {{ form.Age.label }} {{ form.Age(size=32) }}<br>
+    {{ form.Submit() }}
   </form>
+  <div>{{ output }}</div>
 </body>
 <script>
 	const changeRangeValue = (val) => {
