@@ -11,12 +11,15 @@ def index():
     form = DiabetesForm()
     if form.validate_on_submit():
         # met deze data kan dr nou verder mee gewerkt worden in het model
-        data = request.form
-        json_data = jsonify(data)
-        return json_data
-    #Te vervangen met de AI output data 
-    Risk_factor = 1 
-    riskString = "Risk of Diabetes Detected" if Risk_factor == 1 else "No Risk of Diabetes Detected"
-    Confidence = 90
-    ReturnValue = f"There is {riskString} with a certainty of {Confidence}%"
-    return render_template('index.html', form=form, output=ReturnValue)
+        #AI return data
+        data: Unknown = request.form 
+        json_data : Unkown = jsonify(data)
+        print(json_data)
+        Risk, Prob = 1,1
+        riskString = "Risk of Diabetes Detected" if Risk == 1 else "No Risk of Diabetes Detected"
+        ReturnValue = f"There is {riskString} with a certainty of {Prob*100}%"
+        return render_template('index.html', form=form, output=ReturnValue)
+        # return json_data
+    return render_template('index.html', form=form, output="Nothing")
+
+    
