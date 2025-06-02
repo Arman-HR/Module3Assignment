@@ -14,4 +14,4 @@ def index():
         data = request.form
         json_data = jsonify(data)
         return json_data
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, output="Nothing")

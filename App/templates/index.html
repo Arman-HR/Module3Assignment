@@ -46,7 +46,7 @@
       box-sizing: border-box;
     }
 
-    button {
+    input[type="submit"] {
       margin-top: 1.5rem;
       width: 100%;
       padding: 0.75rem;
@@ -59,7 +59,7 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    input[type="submit"]:hover {
       background-color: #45a049;
     }
   </style>
@@ -78,6 +78,7 @@
     {{ form.Age.label }} {{ form.Age(size=32) }}<br>
     {{ form.Submit() }}
   </form>
+  <div>{{ output }}</div>
 </body>
 <script>
 	const changeRangeValue = (val) => {
